@@ -1,7 +1,9 @@
 package com.uuhere.mainjavaapp.controller;
 
+import com.uuhere.mainjavaapp.dto.StudentResponse;
 import com.uuhere.mainjavaapp.model.Student;
 import com.uuhere.mainjavaapp.service.StudentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public Mono<Student> createStudent(@RequestBody Student student) {
-        return studentService.saveStudent(student);
+    public Mono<ResponseEntity<StudentResponse>> createStudent(@RequestBody Student student) {
+        return studentService.saveStudent(student)
+                .map(ResponseEntity::ok);
     }
 }

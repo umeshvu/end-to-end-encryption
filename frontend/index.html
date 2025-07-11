@@ -54,8 +54,8 @@
       });
 
       const result = await res.json();
-      const decryptedId = decrypt(result.studentId);
-      document.getElementById("studentIdDisplay").innerText = "Student ID: " + decryptedId;
+      const decryptedId = decrypt(result.encryptedStudentId);
+      document.getElementById("studentIdDisplay").innerText = "Student ID from Backend: " + decryptedId;
     });
   </script>
 </body>

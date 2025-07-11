@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend/mainjavaapp
+    ports:
+      - "8090:8090"
+    depends_on:
+      - sidecar
+      - db
+    networks:
+      - student-net
+    environment:
+      - SIDECAR_URL=http://sidecar:5000
+      - SPRING_R2DBC_URL=r2dbc:postgresql://db:5432/students
+      - SPRING_R2DBC_USERNAME=admin
+      - SPRING_R2DBC_PASSWORD=admin123
+      - SPRING_FLYWAY_ENABLED=false  # Optional, if using Flyway, set to true
+      - SPRING_LIQUIBASE_ENABLED=false
+
+  sidecar:
+    build: ./backend/sidecar
+    ports:
+      - "5005:5005"
+    networks:
+      - student-net
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - student-net
+
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: students
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - student-net
+
+networks:
+  student-net:
+
+volumes:
+  pgdata:

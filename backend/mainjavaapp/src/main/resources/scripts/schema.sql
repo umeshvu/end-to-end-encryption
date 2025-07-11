@@ -1,7 +1,7 @@
 --basic one
 CREATE TABLE IF NOT EXISTS student (
-    studentId UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    studentName TEXT NOT NULL,
-    studentAge INT,
-    studentSSO TEXT
+    student_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    student_name TEXT NOT NULL,
+    student_age INT,
+    student_sso TEXT
 );

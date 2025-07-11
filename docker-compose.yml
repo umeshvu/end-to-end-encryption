@@ -11,7 +11,7 @@ services:
     networks:
       - student-net
     environment:
-      - SIDECAR_URL=http://sidecar:5000
+      - SIDECAR_URL=http://sidecar:5005
       - SPRING_R2DBC_URL=r2dbc:postgresql://db:5432/students
       - SPRING_R2DBC_USERNAME=admin
       - SPRING_R2DBC_PASSWORD=admin123

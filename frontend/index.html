@@ -47,10 +47,10 @@
       const ssnRaw = document.getElementById("ssn").value;
       const ssnEncrypted = encrypt(ssnRaw);
 
-      const res = await fetch("http://localhost:8080/students", {
+      const res = await fetch("http://localhost:8090/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, age, socialSecurityNumber: ssnEncrypted })
+        body: JSON.stringify({ studentName:name, studentAge:age, studentSSO: ssnEncrypted })
       });
 
       const result = await res.json();
